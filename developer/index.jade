@@ -722,6 +722,19 @@ block slides
                                 process.exit(1);
                         process.exit(0);
 
+    article.center.code-0
+        .wrapper
+            pre
+                code.javascript.
+                    process.stdout.write(JSON.stringify([{
+                        "subject": '/inloggen',
+                        "metrics": metrics.map(metric => ({
+                            "name": audits[metric].title,
+                            "value": audits[metric].rawValue,
+                            "desiredSize": "larger",
+                        }))
+                    }]));
+
     article.center.code-7
         .wrapper
             pre
@@ -741,14 +754,36 @@ block slides
                         before_script:
                             - apt-get update
                             - apt-get -y install gconf-service …
-                            - npm i
+                            - npm ci
                         script:
                             - npm run lighthouse
 
     article.deps
         .wrapper gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
-    article.screen.screen--demo.overlay
+    article.center.code-0
+        .wrapper
+            pre
+                code.yml.
+                    artifacts:
+                        expire_in: 7 days
+                        reports:
+                            performance: performance.json
+
+
+    article.center.code-6
+        .wrapper
+            pre
+                code.diff.
+                    "scripts": {
+                    +    "lighthouse":
+                    +        "node performance.js
+                    +            > performance.json"
+                    },
+
+    article.screen.screen--lighthouse-art
+
+    article.screen.screen--lighthouse-art.overlay
         .overlay__abstract.overlay__abstract--right
             h5.overlay__title Lighthouse example
             img.overlay__qr(src="images/demo.svg", alt="QRCODE cо ссылкой")

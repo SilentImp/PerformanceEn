@@ -189,6 +189,14 @@ npm i -D puppeteer
 </code></pre></div></article><article class="center code-0"><div class="wrapper"><pre><code class="javascript">if (audits["speed-index"].score < 0.7)
         process.exit(1);
 process.exit(0);
+</code></pre></div></article><article class="center code-0"><div class="wrapper"><pre><code class="javascript">process.stdout.write(JSON.stringify([{
+    "subject": '/inloggen',
+    "metrics": metrics.map(metric => ({
+        "name": audits[metric].title,
+        "value": audits[metric].rawValue,
+        "desiredSize": "larger",
+    }))
+}]));
 </code></pre></div></article><article class="center code-7"><div class="wrapper"><pre><code class="yml"># .gitlab-ci.yml
 image: node:latest
 
@@ -199,10 +207,20 @@ stages:
     before_script:
         - apt-get update
         - apt-get -y install gconf-service …
-        - npm i
+        - npm ci
     script:
         - npm run lighthouse
-</code></pre></div></article><article class="deps"><div class="wrapper">gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget</div></article><article class="screen screen--demo overlay"><div class="overlay__abstract overlay__abstract--right"><h5 class="overlay__title">Lighthouse example</h5><img class="overlay__qr" src="images/demo.svg" alt="QRCODE cо ссылкой"><p><a class="overlay__link" href="https://gitlab.com/silentimp/lighthouse" data-click>https://gitlab.com/silentimp/lighthouse</a></p></div></article><article class="screen screen--lighthouse overlay"><div class="overlay__abstract overlay__abstract--right"><h5 class="overlay__title">Lighthouse</h5><img class="overlay__qr" src="images/lighthouse.svg" alt="QRCODE cо ссылкой"><p><a class="overlay__link" href="https://developers.google.com/web/tools/lighthouse/" data-click>https://bit.ly/2jnLfpG</a></p></div></article><article class="screen screen--puppeteer-screen overlay"><div class="overlay__abstract overlay__abstract--right"><h5 class="overlay__title">Puppeteer</h5><img class="overlay__qr" src="images/puppeteer.svg" alt="QRCODE cо ссылкой"><p><a class="overlay__link" href="https://pptr.dev/" data-click>https://pptr.dev/</a></p></div></article><article class="center text-title"><div class="wrapper"><h1>Server<br>Timing</h1></div></article><article class="center code-9"><div class="wrapper"><pre><code class="http">Server-Timing:
+</code></pre></div></article><article class="deps"><div class="wrapper">gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget</div></article><article class="center code-0"><div class="wrapper"><pre><code class="yml">artifacts:
+    expire_in: 7 days
+    reports:
+        performance: performance.json
+
+</code></pre></div></article><article class="center code-6"><div class="wrapper"><pre><code class="diff">"scripts": {
++    "lighthouse":
++        "node performance.js
++            > performance.json"
+},
+</code></pre></div></article><article class="screen screen--lighthouse-art"></article><article class="screen screen--lighthouse-art overlay"><div class="overlay__abstract overlay__abstract--right"><h5 class="overlay__title">Lighthouse example</h5><img class="overlay__qr" src="images/demo.svg" alt="QRCODE cо ссылкой"><p><a class="overlay__link" href="https://gitlab.com/silentimp/lighthouse" data-click>https://gitlab.com/silentimp/lighthouse</a></p></div></article><article class="screen screen--lighthouse overlay"><div class="overlay__abstract overlay__abstract--right"><h5 class="overlay__title">Lighthouse</h5><img class="overlay__qr" src="images/lighthouse.svg" alt="QRCODE cо ссылкой"><p><a class="overlay__link" href="https://developers.google.com/web/tools/lighthouse/" data-click>https://bit.ly/2jnLfpG</a></p></div></article><article class="screen screen--puppeteer-screen overlay"><div class="overlay__abstract overlay__abstract--right"><h5 class="overlay__title">Puppeteer</h5><img class="overlay__qr" src="images/puppeteer.svg" alt="QRCODE cо ссылкой"><p><a class="overlay__link" href="https://pptr.dev/" data-click>https://pptr.dev/</a></p></div></article><article class="center text-title"><div class="wrapper"><h1>Server<br>Timing</h1></div></article><article class="center code-9"><div class="wrapper"><pre><code class="http">Server-Timing:
     cache;
     desc="Cache Read";
     dur=23.2
