@@ -97,6 +97,16 @@ block slides
         .subtitle
             p — Let's add to competitors metrics 20%. It's a magic number so user really may see the difference with the naked eye.
 
+    article.center.illustration.illustration--box
+
+    article.screen.screen--performancebudget.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Set your time goal
+            img.overlay__qr(src="images/performancebudget.svg", alt="QRCODE with link")
+            p
+                a.overlay__link(href="http://www.performancebudget.io/", data-click=true) http://www.performancebudget.io/
+
+
     article.center.types
         .wrapper
             h1 Measurements types
@@ -237,16 +247,13 @@ block slides
                     }]
 
 
-    article.center.code-6
+    article.center.code-3
         .wrapper
             pre
                 code.
                     // generate-metric.js
-                    const report =
-                        require('./size-limit.json');
-                    process.stdout.write(`size ${(
-                            report[0].size / 1024
-                        ).toFixed(1)}`);
+                    const report = require('./size-limit.json');
+                    process.stdout.write(`size ${(report[0].size/1024).toFixed(1)}`);
                     process.exit(0);
 
     article.center.code-10
@@ -307,22 +314,18 @@ block slides
 
     article.illustration.illustration--nextjs
 
-    article.center.code-6
+    article.center.code-0
         .wrapper
             pre
-                code.bash.
-                    npm i -S
-                        @zeit/next-bundle-analyzer
+                code.bash npm i -S @zeit/next-bundle-analyzer
 
-    article.center.code-0
+    article.center.code-3
         .wrapper
             pre
                 code.js.
                     // next.config.js
-                    const withBundleAnalyzer =
-                        require('@zeit/next-bundle-analyzer');
-                    module.exports =
-                        withBundleAnalyzer({/* … */});
+                    const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
+                    module.exports = withBundleAnalyzer({/* … */});
 
     article.center.code-6
         .wrapper
@@ -463,13 +466,11 @@ block slides
             p
                 a.overlay__link(href="https://github.com/login/oauth/authorize?scope=repo%3Astatus&client_id=6756cb03a8d6528aca5a", data-click=true) https://bit.ly/2kpdVnA
 
-    article.center.code-6
+    article.center.code-2
         .wrapper
             pre
                 code.
-                    travis encrypt
-                        BUNDLESIZE_GITHUB_TOKEN=token
-                        --add
+                    travis encrypt BUNDLESIZE_GITHUB_TOKEN=token --add
 
     article.screen.screen--bundlesize-1
 
@@ -897,14 +898,12 @@ block slides
                     // [ seconds, nanoseconds ]
                     // [ 8063, 904046009 ]
 
-    article.center.code-8
+    article.center.code-0
         .wrapper
             pre
-                code.javascript.
-                    const from =
-                        process.hrtime();
-                    const duration =
-                        process.hrtime(from);
+                code.
+                    const from = process.hrtime();
+                    const duration = process.hrtime(from);
 
     article.center.code-6
         .wrapper
@@ -916,24 +915,21 @@ block slides
                                 duration[1] * 1e-6,
                                10);
 
-    article.center.code-7
+    article.center.code-0
         .wrapper
             pre
                 code.javascript.
                     // node.js v10.7.0, Stage 3
-                    const from =
-                        process.hrtime.bigint();
-                    const to =
-                        process.hrtime.bigint();
+                    const from = process.hrtime.bigint();
+                    const to = process.hrtime.bigint();
                     const duration = to - from;
 
-    article.center.code-9
+    article.center.code-6
         .wrapper
             pre
                 code.javascript.
                     // To milliseconds
-                    const ms =
-                        duration / 1000000n;
+                    const ms = duration / 1000000n;
 
     article.screen.screen--bigint.overlay
         .overlay__abstract.overlay__abstract--right
@@ -1041,85 +1037,85 @@ block slides
                 a.overlay__link(href="https://www.w3.org/TR/2019/WD-server-timing-20190307/", data-click=true) https://www.w3.org/TR/2019/WD-server-timing-20190307/
 
 
-    article.center.trailer-title
-        .wrapper
-            h1 Trailer
-                br
-                | Header
+    //- article.center.trailer-title
+    //-     .wrapper
+    //-         h1 Trailer
+    //-             br
+    //-             | Header
 
-    article.screen.screen--ttfb-data
+    //- article.screen.screen--ttfb-data
 
-    article.center.code-0
-        .wrapper
-            pre
-                code.javascript.
-                    const {
-                        renderToNodeStream
-                        } = require("react-dom/server");
-                    const React = require("react");
-                    const express = require('express');
-                    const app = express();
-                    app.get('/', (req, res) => {/*…*/});
-                    app.listen(3000);
+    //- article.center.code-0
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 const {
+    //-                     renderToNodeStream
+    //-                     } = require("react-dom/server");
+    //-                 const React = require("react");
+    //-                 const express = require('express');
+    //-                 const app = express();
+    //-                 app.get('/', (req, res) => {/*…*/});
+    //-                 app.listen(3000);
 
-    article.center.code-6
-        .wrapper
-            pre
-                code.javascript.
-                    res.writeHead(200, {
-                        'Content-Type': 'text/html',
-                        'Transfer-Encoding': 'chunked'
-                    });
-                    res.write("&lt;main id='content'>");
+    //- article.center.code-6
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 res.writeHead(200, {
+    //-                     'Content-Type': 'text/html',
+    //-                     'Transfer-Encoding': 'chunked'
+    //-                 });
+    //-                 res.write("&lt;main id='content'>");
 
-    article.center.code-6
-        .wrapper
-            pre
-                code.javascript.
-                    const stream = renderToNodeStream(
-                        React.createElement(
-                            'p', null, 'XXX'));
-                    stream.pipe(res, { end: false });
-                    stream.on('end', () => {
-                        res.write("&lt;/main>").end();
-                    });
+    //- article.center.code-1
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 const stream = renderToNodeStream(
+    //-                     React.createElement('p', null, 'XXX')
+    //-                 );
+    //-                 stream.pipe(res, { end: false });
+    //-                 stream.on('end', () => {
+    //-                     res.write("&lt;/main>").end();
+    //-                 });
 
-    article.center.code-10
-        .wrapper
-            pre
-                code.javascript.
-                    Server-Timing?
+    //- article.center.code-10
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 Server-Timing?
 
-    article.center.code-6
-        .wrapper
-            pre
-                code.javascript.
-                    res.writeHead(200, {
-                        'Trailer': 'Server-Timing',
-                        // …
-                    });
+    //- article.center.code-6
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 res.writeHead(200, {
+    //-                     'Trailer': 'Server-Timing',
+    //-                     // …
+    //-                 });
 
-    article.center.code-0
-        .wrapper
-            pre
-                code.javascript.
-                    stream.on('end', () => {
-                        res.write("&lt;/main>")
-                        res.addTrailers({
-                            'Server-Timing':
-                            'metric;desc="metric 2";dur=12'
-                        });
-                        res.end();
-                    });
+    //- article.center.code-0
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 stream.on('end', () => {
+    //-                     res.write("&lt;/main>")
+    //-                     res.addTrailers({
+    //-                         'Server-Timing':
+    //-                         'metric;desc="metric 2";dur=12'
+    //-                     });
+    //-                     res.end();
+    //-                 });
 
-    article.screen.screen--trail
+    //- article.screen.screen--trail
 
-    article.screen.screen--trailer.overlay
-        .overlay__abstract.overlay__abstract--right
-            h5.overlay__title Trailer
-            img.overlay__qr(src="images/trailer.svg", alt="QRCODE cо ссылкой")
-            p
-                a.overlay__link(href="https://tools.ietf.org/html/rfc7230#section-4.4", data-click=true) https://tools.ietf.org/html/rfc7230
+    //- article.screen.screen--trailer.overlay
+    //-     .overlay__abstract.overlay__abstract--right
+    //-         h5.overlay__title Trailer
+    //-         img.overlay__qr(src="images/trailer.svg", alt="QRCODE cо ссылкой")
+    //-         p
+    //-             a.overlay__link(href="https://tools.ietf.org/html/rfc7230#section-4.4", data-click=true) https://tools.ietf.org/html/rfc7230
 
     //- article.center.hint-title
     //-     .wrapper
@@ -1378,15 +1374,12 @@ block slides
                     performance.getEntriesByName(name)
                     performance.getEntries()
 
-    article.center.code-1
+    article.center.code-2
         .wrapper
             pre
                 code.javascript.
-                    const observer
-                        = new PerformanceObserver(this.handler);
-                    observer.observe({
-                        entryTypes
-                    });
+                    const observer = new PerformanceObserver(this.handler);
+                    observer.observe({ entryTypes });
 
 
     article.center.hires-time
@@ -1573,16 +1566,13 @@ block slides
                             .includes(entry);
                     });
 
-    article.center.code-0
+    article.center.code-2
         .wrapper
             pre
                 code.javascript.
                     if (entryTypes.length > 0) {
-                        const observer =
-                            new PerformanceObserver(report);
-                        observer.observe({
-                            entryTypes
-                        });
+                        const observer = new PerformanceObserver(report);
+                        observer.observe({ entryTypes });
                     }
 
     article.screen.screen--long.overlay
@@ -1966,6 +1956,7 @@ block slides
         .wrapper
             .about-speaker.half
                 p.name Anton Nemtsev
+                img.logo(src="images/logo.svg", alt="Werkspot")
                 p.link http://silentimp.info/
                 p.twitter @cadaverGordo
                 p.email thesilentimp@gmail.com
@@ -1973,4 +1964,4 @@ block slides
             .half
                 img(src="images/git.svg", alt="QRCODE cо ссылкой на доклад")
             p
-                a(href="https://github.com/SilentImp/PerformanceEn", data-click=true) https://github.com/SilentImp/PerformanceEn
+                a(href="https://github.com/SilentImp/PerformanceEn", data-click=true) https://bit.ly/2lQrJYt

@@ -1214,6 +1214,9 @@ html body section#slides article iframe.half:last-child {
   -webkit-background-clip: text;
   color: transparent;
 }
+.illustration--box {
+  background-image: url("../images/box.jpeg");
+}
 .illustration--travis-ci {
   background-image: url("../images/travisci.png");
   background-size: contain;
@@ -1297,6 +1300,14 @@ html body section#slides article iframe.half:last-child {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+body img.logo.logo.logo.logo {
+  height: 50px;
+  margin: 10px 0 50px;
+  display: block;
+}
+.screen--performancebudget {
+  background-image: url("../images/performancebudget.png");
 }
 .screen--lighthouse-art {
   background-image: url("../images/lighthouse-art.png");
