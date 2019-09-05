@@ -1324,6 +1324,9 @@ body img.logo.logo.logo.logo {
   margin: 10px 0 50px;
   display: block;
 }
+.screen--longtask {
+  background-image: url("../images/longtask.png");
+}
 .screen--types {
   background-image: url("../images/types.png");
 }

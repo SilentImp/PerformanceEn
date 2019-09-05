@@ -1601,26 +1601,7 @@ block slides
                 br
                 | Task
 
-    article.center.code-0
-        .wrapper
-            pre
-                code.javascript.
-                    const plannedEntries = ['longtask'];
-                    const entryTypes =
-                        plannedEntries.filter(entry => {
-                        return PerformanceObserver
-                            .supportedEntryTypes
-                            .includes(entry);
-                    });
-
-    article.center.code-2
-        .wrapper
-            pre
-                code.javascript.
-                    if (entryTypes.length > 0) {
-                        const observer = new PerformanceObserver(report);
-                        observer.observe({ entryTypes });
-                    }
+    article.screen.screen--longtask
 
     article.screen.screen--long.overlay
         .overlay__abstract.overlay__abstract--right
