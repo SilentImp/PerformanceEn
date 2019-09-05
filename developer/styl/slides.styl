@@ -162,6 +162,23 @@
     -webkit-background-clip: text;
     color: transparent;
 
+.layout h1
+    filter: hue-rotate(100deg);
+    animation hue 10s infinite linear both;
+    font-size 310px
+    line-height 240px
+    font-family 'Bebas'
+    text-align left
+    letter-spacing 0
+    position relative
+    left -65px
+    padding-top 5px
+    background: linear-gradient(535deg, #77A1D3 15%, #79CBCA 46%, #E684AE 100%);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
 .trailer-title h1
     filter: hue-rotate(100deg);
     animation hue 10s infinite linear both;
@@ -490,6 +507,14 @@ body img.logo.logo.logo.logo
     display block
 
 .screen
+    &--types
+        background-image url(../images/types.png)
+    &--instability
+        background-image url(../images/instability.png)
+    &--instability-spec
+        background-image url(../images/instability-spec.png)
+    &--server-timing-use
+        background-image url(../images/servertimingexample.png)
     &--performancebudget
         background-image url(../images/performancebudget.png)
     &--lighthouse-art

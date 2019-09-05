@@ -954,6 +954,24 @@ html body section#slides article iframe.half:last-child {
   -webkit-background-clip: text;
   color: transparent;
 }
+.layout h1 {
+  -webkit-filter: hue-rotate(100deg);
+          filter: hue-rotate(100deg);
+  -webkit-animation: hue 10s infinite linear both;
+          animation: hue 10s infinite linear both;
+  font-size: 310px;
+  line-height: 240px;
+  font-family: 'Bebas';
+  text-align: left;
+  letter-spacing: 0;
+  position: relative;
+  left: -65px;
+  padding-top: 5px;
+  background: linear-gradient(535deg, #77a1d3 15%, #79cbca 46%, #e684ae 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
 .trailer-title h1 {
   -webkit-filter: hue-rotate(100deg);
           filter: hue-rotate(100deg);
@@ -1305,6 +1323,18 @@ body img.logo.logo.logo.logo {
   height: 50px;
   margin: 10px 0 50px;
   display: block;
+}
+.screen--types {
+  background-image: url("../images/types.png");
+}
+.screen--instability {
+  background-image: url("../images/instability.png");
+}
+.screen--instability-spec {
+  background-image: url("../images/instability-spec.png");
+}
+.screen--server-timing-use {
+  background-image: url("../images/servertimingexample.png");
 }
 .screen--performancebudget {
   background-image: url("../images/performancebudget.png");
