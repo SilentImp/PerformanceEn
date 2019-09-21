@@ -94,6 +94,18 @@
     }
 }
 
+@keyframes ornam {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: 825px;
+    }
+}
+
+.contacts img:not(.logo)
+    transform: translateX(-40px)
+
 .entry
     ul li
         font-size 80px
@@ -145,6 +157,22 @@
 .logotypes .wrapper
     width 100%
 
+.frame h1
+    filter: hue-rotate(100deg);
+    animation hue 10s infinite linear both;
+    font-size 490px
+    line-height 360px
+    font-family 'Bebas'
+    text-align left
+    letter-spacing -10px
+    position relative
+    left -155px
+    padding-top 35px
+    background: linear-gradient(735deg, #5433FF 15%, #20BDFF 46%, #A5FECB 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
 .preload-title h1
     filter: hue-rotate(100deg);
     animation hue 10s infinite linear both;
@@ -155,6 +183,40 @@
     letter-spacing -10px
     position relative
     left -55px
+    padding-top 15px
+    background: linear-gradient(735deg, #5433FF 15%, #20BDFF 46%, #A5FECB 100%);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+.network h1
+    filter: hue-rotate(100deg);
+    animation hue 10s infinite linear both;
+    font-size 320px
+    line-height 240px
+    font-family 'Bebas'
+    text-align left
+    letter-spacing -10px
+    position relative
+    left -25px
+    padding-top 15px
+    background: linear-gradient(735deg, #5433FF 15%, #20BDFF 46%, #A5FECB 100%);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+.battery h1
+    filter: hue-rotate(100deg);
+    animation hue 10s infinite linear both;
+    font-size 320px
+    line-height 240px
+    font-family 'Bebas'
+    text-align left
+    letter-spacing 0
+    position relative
+    left -195px
     padding-top 15px
     background: linear-gradient(735deg, #5433FF 15%, #20BDFF 46%, #A5FECB 100%);
 
@@ -304,6 +366,22 @@
     font-size 46px
     line-height 52px
 
+.paint h1
+    font-size 670px
+    line-height 670px
+    font-family 'Bebas'
+    text-align left
+    letter-spacing 0
+    position relative
+    top 50px
+    padding-top 0
+    background: linear-gradient(23deg, #C6FFDD 25%, #FBD786 50%, #f7797d 100%);
+    animation hue 10s infinite linear both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+
 .long h1
     font-size 480px
     line-height 400px
@@ -426,7 +504,18 @@
     -webkit-background-clip: text;
     color: transparent;
 
+.career
+    writing-mode: vertical-lr;
+    text-align: center
+    vertical-align: middle
+    font-size: 36px
+    padding 20px
+
 .illustration
+    &--culture
+        background-image url(../images/culture.png)
+        background-size contain
+        background-position 50% -20px
     &--box
         background-image url(../images/box.jpeg)
     &--travis-ci
@@ -507,8 +596,28 @@ body img.logo.logo.logo.logo
     display block
 
 .screen
+    &--rumtalk
+        background-image url(../images/rumtalk.png)
+    &--network
+        background-image url(../images/network-example.png)
+    &--network-spec
+        background-image url(../images/network.png)
+    &--battery
+        background-image url(../images/battery-example.png)
+    &--battery-spec
+        background-image url(../images/battery.png)
+    &--frame
+        background-image url(../images/frame.png)
+    &--gist
+        background-image url(../images/gist.png)
+    &--painttask
+        background-image url(../images/painttask.png)
+    &--paint
+        background-image url(../images/paint.png)
     &--longtask
         background-image url(../images/longtask.png)
+    &--longtasktask
+        background-image url(../images/longtasktask.png)
     &--types
         background-image url(../images/types.png)
     &--instability
@@ -519,6 +628,10 @@ body img.logo.logo.logo.logo
         background-image url(../images/servertimingexample.png)
     &--performancebudget
         background-image url(../images/performancebudget.png)
+    &--lighthouse-metric
+        background-image url(../images/lighthouse-metrics.png)
+    &--lighthouse-metric-example
+        background-image url(../images/lighthouse-metrics-example.png)
     &--lighthouse-art
         background-image url(../images/lighthouse-art.png)
     &--sitespeed

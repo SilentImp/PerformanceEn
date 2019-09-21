@@ -405,12 +405,67 @@ ul
   li
     margin 0 0 20px
 
+@keyframes ornam2 {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 825px, 0 0;
+  }
+}
+
+@keyframes hue {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
 article
   overflow hidden
   width slide-width
   height slide-height
   margin slide-margin auto
   background-color slide-bgc
+
+  &:first-of-type:before
+    display block
+    content ''
+    position absolute
+    top 0
+    bottom 0
+    right 0
+    width 83px
+    pointer-events none
+    background-image url('../images/vt.gif'), linear-gradient(23deg, #C6FFDD 25%, #FBD786 50%, #f7797d 100%);
+    background-position 100% 0, 100% 0
+    background-repeat repeat-y
+    filter: hue-rotate(100deg);
+    will-change: filter, background-position;
+    animation hue 10s infinite linear both, ornam2 20s infinite linear;
+    contain: strict
+
+
+  &.illustration--culture:before
+  &:last-child:before
+    display block
+    content ''
+    position absolute
+    top 0
+    bottom 0
+    right 0
+    width 83px
+    pointer-events none
+    background-image url('../images/vt.gif'), linear-gradient(23deg, #C6FFDD 25%, #FBD786 50%, #f7797d 100%);
+    background-position 100% 0, 100% 0
+    background-repeat repeat-y
+    filter: hue-rotate(100deg);
+    will-change: filter, background-position;
+    animation hue 10s infinite linear both, ornam2 20s infinite linear;
+    contain: strict
+
   position relative
   color light-color
   counter-increment slide

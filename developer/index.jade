@@ -704,11 +704,20 @@ block slides
                         onlyCategories: ['performance']
                     }};
 
-    article.center.code-6
+    article.center.code-7
+        .wrapper
+            pre
+                code.javascript.
+                    const auditConfig = {
+                        extends: 'lighthouse:full'
+                    };
+
+    article.center.code-0
         .wrapper
             pre
                 code.javascript.
                     const {
+                        report: reportJSON,
                         lhr: {
                             audits
                         }} = await lighthouse(
@@ -721,22 +730,50 @@ block slides
         .wrapper
             pre
                 code.javascript.
-                        if (audits["speed-index"].score < 0.7)
-                                process.exit(1);
-                        process.exit(0);
+                    if (audits["speed-index"].score < 0.75)
+                            process.exit(1);
+                    process.exit(0);
+
 
     article.center.code-0
         .wrapper
             pre
                 code.javascript.
-                    process.stdout.write(JSON.stringify([{
+                    const {categories: {
+                        performance: {
+                            score
+                        }
+                    }} = JSON.parse(reportJSON);
+                    if (score < 0.75)
+                            process.exit(1);
+                    process.exit(0);
+
+    //- article.center.code-0
+    //-     .wrapper
+    //-         pre
+    //-             code.javascript.
+    //-                 process.stdout.write(JSON.stringify([{
+    //-                     "subject": '/inloggen',
+    //-                     "metrics": metrics.map(metric => ({
+    //-                         "name": metric.title,
+    //-                         "value": metric.value,
+    //-                         "desiredSize": "larger",
+    //-                     }))
+    //-                 }]));
+
+    article.center.code-1
+        .wrapper
+            pre
+                code.javascript.
+                    const report = JSON.stringify([{
                         "subject": '/inloggen',
                         "metrics": metrics.map(metric => ({
-                            "name": audits[metric].title,
-                            "value": audits[metric].rawValue,
+                            "name": metric.title,
+                            "value": metric.value,
                             "desiredSize": "larger",
                         }))
-                    }]));
+                    }]);
+                    fs.writeFileSync(`./performance.json`, report);
 
     article.center.code-7
         .wrapper
@@ -759,7 +796,7 @@ block slides
                             - apt-get -y install gconf-service …
                             - npm ci
                         script:
-                            - npm run lighthouse
+                            - node performance.js
 
     article.deps
         .wrapper gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
@@ -776,15 +813,15 @@ block slides
                             performance: performance.json
 
 
-    article.center.code-6
-        .wrapper
-            pre
-                code.diff.
-                    "scripts": {
-                    +    "lighthouse":
-                    +        "node performance.js
-                    +            > performance.json"
-                    },
+    //- article.center.code-6
+    //-     .wrapper
+    //-         pre
+    //-             code.diff.
+    //-                 "scripts": {
+    //-                 +    "lighthouse":
+    //-                 +        "node performance.js
+    //-                 +            > performance.json"
+    //-                 },
 
     article.screen.screen--lighthouse-art
 
@@ -794,6 +831,41 @@ block slides
             img.overlay__qr(src="images/demo.svg", alt="QRCODE cо ссылкой")
             p
                 a.overlay__link(href="https://gitlab.com/silentimp/lighthouse", data-click=true) https://gitlab.com/silentimp/lighthouse
+
+    article.screen.screen--lighthouse-metric
+
+    article.screen.screen--lighthouse-metric-example
+
+    article.screen.screen--lighthouse-metric-example.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Lighthouse example (the cool one)
+            img.overlay__qr(src="images/demoreport.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://gitlab.com/silentimp/lighthousereport", data-click=true) https://bit.ly/2m6m80d
+
+    article.center.code-2
+        .wrapper
+            pre
+                code.javascript.
+                    const page = await browser.newPage();
+                    await page.goto(url, { waitUntil: 'networkidle2' });
+                    await page.click('input[name=email]');
+                    await page.keyboard.type(USER_EMAIL);
+                    await page.click('input[name=password]');
+                    await page.keyboard.type(USER_PASSWORD);
+                    await page.click('button[type="submit"]',
+                        { waitUntil: 'domcontentloaded' });
+
+
+    article.screen.screen--gist
+
+    article.screen.screen--gist.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Lighthouse script gist
+            img.overlay__qr(src="images/gist.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://gist.github.com/SilentImp/1a770e4f5b9d8dc1e0e92c54f76357f9", data-click=true) https://gitlab.com/silentimp/lighthouse
+
 
     article.screen.screen--lighthouse.overlay
         .overlay__abstract.overlay__abstract--right
@@ -1400,10 +1472,12 @@ block slides
                 li measure
                 li navigation
                 li firstInput
+                li frame
             ul.half
                 li resource
                 li longtask
                 li layoutShift
+                li paint
                 li …
 
     article.center.code-0
@@ -1426,7 +1500,7 @@ block slides
         .wrapper
             pre
                 code.javascript.
-                    const observer = new PerformanceObserver(this.handler);
+                    const observer = new PerformanceObserver(handler);
                     observer.observe({ entryTypes });
 
 
@@ -1559,7 +1633,7 @@ block slides
 
     //- article.screen.screen--timing-f
 
-    article.screen.screen--navigation
+    //- article.screen.screen--navigation
 
     article.screen.screen--navi
 
@@ -1595,11 +1669,49 @@ block slides
             p
                 a.overlay__link(href="https://w3c.github.io/resource-timing/", data-click=true) https://w3c.github.io/resource-timing/
 
+    article.center.paint
+        .wrapper
+            h1 Paint
+
+    article.center.code-6
+        .wrapper
+            pre
+                code.javascript.
+                    const entries = performance
+                        .getEntriesByType("paint");
+                    for (const entry of entries) {
+                        console.table(entry.toJSON());
+                    }
+
+    article.screen.screen--painttask
+
+    article.screen.screen--paint.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Paint Timing 1
+            img.overlay__qr(src="images/paint.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://w3c.github.io/paint-timing/", data-click=true) https://w3c.github.io/paint-timing/
+
+
     article.center.long
         .wrapper
             h1 Long
                 br
                 | Task
+
+    article.center.code-2
+        .wrapper
+            pre
+                code.javascript.
+                    const observer = new PerformanceObserver(
+                        (list, observer)=>{
+                            const perfEntries = list.getEntries();
+                            for (var i = 0; i < perfEntries.length; i++) {
+                                console.log(perfEntries[i]);
+                      }});
+                    observer.observe({ entryTypes: ['longtask'] });
+
+    article.screen.screen--longtasktask
 
     article.screen.screen--longtask
 
@@ -1635,41 +1747,86 @@ block slides
             p
                 a.overlay__link(href="https://wicg.github.io/layout-instability/", data-click=true) https://bit.ly/2lyJOKy
 
+    article.screen.screen--rumtalk.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Measuring Real User Performance in the Browser
+            img.overlay__qr(src="images/rumtalk.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://www.youtube.com/watch?v=yrWLi524YLM", data-click=true) https://www.youtube.com/watch?v=yrWLi524YLM
+
+    article.center.frame
+        .wrapper
+            h1 Frame
+                br
+                | Timing
+
+
+    article.screen.screen--frame.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Frame Timing
+            img.overlay__qr(src="images/layout.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://wicg.github.io/frame-timing/", data-click=true) https://wicg.github.io/frame-timing/
+
+
+    article.center.battery
+        .wrapper
+            h1 Battery
+                br
+                | Status
+                br
+                | API
+
+    article.screen.screen--battery
+
+    article.screen.screen--battery-spec.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Battery Status API
+            img.overlay__qr(src="images/battery.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://w3c.github.io/battery/", data-click=true) https://w3c.github.io/battery/
+
+
+    article.center.network
+        .wrapper
+            h1 Network
+                br
+                | Information
+                br
+                | API
+
+    article.screen.screen--network
+
+    article.screen.screen--network-spec.overlay
+        .overlay__abstract.overlay__abstract--right
+            h5.overlay__title Network Information API
+            img.overlay__qr(src="images/network.svg", alt="QRCODE cо ссылкой")
+            p
+                a.overlay__link(href="https://wicg.github.io/netinfo/", data-click=true) https://wicg.github.io/netinfo/
+
+
     article.center.beacon
         .wrapper
             h1 Beacon
 
-    article.center.code-2
+    article.center.code-6
         .wrapper
             pre
                 code.javascript.
                     const express = require('express');
-                    const formidable = require('express-formidable');
-                    const path = require('path');
+                    const multer = require('multer');
                     const port = 3333;
                     const app = express();
-
-    article.center.code-0
-        .wrapper
-            pre
-                code.javascript.
-                    app.use(formidable({
-                        encoding: 'utf-8',
-                        uploadDir: path.join(
-                            __dirname,
-                            'uploads'),
-                        multiples: true,
-                        keepExtensions:true,
-                    }));
 
     article.center.code-6
         .wrapper
             pre
                 code.javascript.
                     app.use('/reports',
+                        multer().none(),
                         function (req, res) {
                             res.status(204).end();
-                            console.log(req.fields);
+                            console.log(req.body);
                     });
 
     article.center.code-0
@@ -1998,13 +2155,16 @@ block slides
     //-     p
     //-       a.overlay__link(href="https://eslint.org/docs/developer-guide/architecture", data-click=true) https://goo.gl/RpEUbq
 
+    article.illustration.illustration--culture
+        a.career(href="https://www.careersatwerkspot.com/vacancies/", data-click=true) https://careersatwerkspot.com/vacancies/
+
     article.contacts.center.qrcode
         .wrapper
             .about-speaker.half
                 p.name Anton Nemtsev
                 img.logo(src="images/logo.svg", alt="Werkspot")
                 p.link http://silentimp.info/
-                p.twitter @cadaverGordo
+                p.twitter @silentimp
                 p.email thesilentimp@gmail.com
                 p.skype skype: ravencry
             .half
